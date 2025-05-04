@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
+  final String email;
+
+  const Profile({super.key, required this.email});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,21 +13,28 @@ class Profile extends StatelessWidget {
         title: Text("Halaman Profil"),
       ),
       body: Center(
-        child: Stack(
-          alignment: Alignment.topRight,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage("assets/profile.jpg"),
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage("assets/profile.jpg"),
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: Icon(Icons.edit, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: CircleAvatar(
-                backgroundColor: Colors.blue,
-                child: Icon(Icons.edit, color: Colors.white),
-              ),
-            ),
+            SizedBox(height: 20),
+            Text("Username: $email", style: TextStyle(fontSize: 18)),
           ],
         ),
       ),
