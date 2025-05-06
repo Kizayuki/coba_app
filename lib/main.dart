@@ -5,6 +5,8 @@ import 'login_screen.dart';
 import 'cart.dart';
 import 'login2_screen.dart';
 import 'login3_screen.dart';
+import 'package:get/get.dart';
+import 'splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +28,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: Brightness.light,
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
       ),
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: Login(toggleTheme: toggleTheme),
+      home: SplashScreen(),
     );
   }
 }

@@ -1,10 +1,9 @@
 import 'package:coba_aps/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
-  final VoidCallback toggleTheme;
-
-  const Login({super.key, required this.toggleTheme});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _Login3State();
@@ -23,10 +22,7 @@ class _Login3State extends State<Login> {
 
   void _login() {
     String username = usernameController.text;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Profile(email: username)),
-    );
+    Get.to(() => Profile(email: username));
   }
 
   @override
@@ -35,12 +31,7 @@ class _Login3State extends State<Login> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text("Halaman Login"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.brightness_6),
-            onPressed: widget.toggleTheme,
-          ),
-        ],
+        actions: [],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
