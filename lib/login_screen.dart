@@ -1,6 +1,7 @@
-import 'package:coba_aps/profile.dart';
+import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -22,7 +23,9 @@ class _Login3State extends State<Login> {
 
   void _login() {
     String username = usernameController.text;
-    Get.to(() => Profile(email: username));
+    final box = GetStorage();
+    box.write("username", username);
+    Get.off(() => HomeScreen(toggleTheme: () {}));
   }
 
   @override
@@ -31,7 +34,6 @@ class _Login3State extends State<Login> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text("Halaman Login"),
-        actions: [],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -64,7 +66,14 @@ class _Login3State extends State<Login> {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(onPressed: _login, child: Text("Login")),
+            ElevatedButton(
+              onPressed: () {
+                final box = GetStorage();
+                box.write("username", usernameController.text);
+                _login();
+              },
+              child: Text("Login"),
+            ),
           ],
         ),
       ),

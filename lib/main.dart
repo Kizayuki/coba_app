@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'kontak.dart';
-import 'profile.dart';
-import 'login_screen.dart';
-import 'cart.dart';
-import 'login2_screen.dart';
-import 'login3_screen.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'splash_screen.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -40,7 +36,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
       ),
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: SplashScreen(),
+      home: SplashScreen(toggleTheme: toggleTheme),
     );
   }
 }

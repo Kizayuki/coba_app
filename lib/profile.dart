@@ -1,4 +1,7 @@
+import 'package:coba_aps/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
   final String email;
@@ -11,6 +14,16 @@ class Profile extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text("Halaman Profil"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              final box = GetStorage();
+              box.remove('username');
+              Get.off(() => Login());
+            },
+            child: Text("logout"),
+          ),
+        ],
       ),
       body: Center(
         child: Column(

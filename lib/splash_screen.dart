@@ -1,9 +1,13 @@
+import 'package:coba_aps/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final VoidCallback toggleTheme;
+
+  const SplashScreen({super.key, required this.toggleTheme});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -14,7 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      Get.to(() => Login());
+      final box = GetStorage();
+      final statusUsername = box.read('username');
+
+      if (statusUsername == null) {
+        Get.off(() => Login());
+      } else {
+        Get.off(() => HomeScreen(toggleTheme: widget.toggleTheme));
+      }
     });
   }
 
@@ -24,7 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Logo App"), CircularProgressIndicator()],
+          children: [
+            Text("Welcome Coba App"),
+            SizedBox(height: 10),
+            CircularProgressIndicator(),
+          ],
         ),
       ),
     );
